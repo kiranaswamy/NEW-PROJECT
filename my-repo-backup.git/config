@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = E:/Express-work/Expense-Tracker-AWS/.
+	fetch = +refs/*:refs/*
+	mirror = true

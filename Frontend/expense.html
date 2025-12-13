@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+   <link rel="stylesheet" href="index.css">
+ 
+</head>
+<body class="bg-light p-3">
+
+  <div class="container">
+    <h1 class="mb-4">Expense Tracker</h1>
+    <div class="card p-3 mb-4">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-3">
+          <label for="expense-amount" class="form-label">Amount</label>
+          <input type="number" class="form-control" id="expense-amount" placeholder="Enter amount">
+        </div>
+        <div class="col-md-3">
+          <label for="expense-description" class="form-label">Description</label>
+          <input type="text" class="form-control" id="expense-description" placeholder="Enter description">
+        </div>
+        <div class="col-md-3">
+          <label for="expense-category" class="form-label">Category</label>
+          <select class="form-select" id="expense-category">
+            <option value="Fuel">Fuel</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Food">Food</option>
+            <option value="Movies">Movies</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-primary w-100" type="button" onclick="Timetracker()">Add Expense</button>
+        </div>
+        <div><p>You are the premium user</p>
+          <button class="show-button" type="submit" onClick="LeaderBoard()">Show Leaderboard</button>
+           <button class="Download-Expenses" id="downloadBtn" disabled>Download Expenses</button>
+        </div>
+      </div>
+    </div>
+    <div><h1>Expenses</h1> <ul id="expense-list" class="list-group"></ul>
+    <div class="mt-3 d-flex align-items-center gap-2">
+      <button class="btn btn-secondary btn-sm" onclick="firstPage()">First</button>
+      <button class="btn btn-secondary btn-sm" onclick="prevPage()">Previous</button>
+
+      <span id="page-info" class="mx-2 fw-bold"></span>
+
+      <button class="btn btn-secondary btn-sm" onclick="nextPage()">Next</button>
+      <button class="btn btn-secondary btn-sm" onclick="lastPage()">Last</button>
+    </div>
+
+    <div class="leadr-board"><h1>Leader Board</h1></div>
+  </div>
+  
+   <script src="expense.js"></script>
+</body>
+</html>

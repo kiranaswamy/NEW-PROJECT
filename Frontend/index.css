@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    width: 250px;
+    padding: 6px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+}
+
+button {
+    padding: 8px 20px;
+    cursor: pointer;
+}
+.leadr-board{
+    margin-top: 20px;
+    font-weight: bold;
+}
+.show-button{
+    border-radius: 5px;
+    background-color: antiquewhite;
+}
+.Download-Expenses{
+    background-color:pink;
+    border-radius: 5px;
+    margin-left: 10px;
+    border-color: black;
+    color:black
+}
+#downloadBtn {
+  padding: 10px 20px;
+  background-color: #0066ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#downloadBtn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+} 

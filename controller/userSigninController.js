@@ -62,8 +62,7 @@ const signin = async (req, res) => {
     
     const token = jwt.sign(
       { userId: user.id },    
-      "5acef0e2f3126957d130e3cf920cb215e57075d710db19298c7896bac42cae9dbfdf55ffd80050f9a3031b2c7227efed6c5d6f1627f790fa0f8cb7a98aab7dad", 
-      { expiresIn: "1d" } 
+        process.env.JWT_SECRET,
     );
 
     return res.status(200).json({

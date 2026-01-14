@@ -58,6 +58,45 @@ const getExpenses = async (req, res) => {
   }
 };
 
+const updateExpense = async (req, res) => {
+  const t = await sequelize.transaction();
+  try {
+    const userId = req.userId;
+    const expenseId = req.params.id; // ✅ get id from URL
+    const { amount, description, category } = req.body;
+
+    const expense = await Expense.findOne({
+      where: { id: expenseId, UserId: userId }
+    });
+
+    if (!expense) {
+      await t.rollback();
+      return res.status(404).json({ error: "Expense not found" });
+    }
+
+    // Update totalExpense in User table
+    if (amount !== undefined && expense.amount !== amount) {
+      const diff = amount - expense.amount;
+      await User.increment("totalExpense", {
+        by: diff,
+        where: { id: userId },
+        transaction: t
+      });
+    }
+
+    expense.amount = amount;
+    expense.description = description;
+    expense.category = category;
+    await expense.save({ transaction: t });
+
+    await t.commit();
+    res.status(200).json(expense);
+  } catch (err) {
+    console.error(err);
+    await t.rollback();
+    res.status(500).json({ error: "Failed to update expense" });
+  }
+};
 
 const deleteExpense = async (req, res) => {
    const t = await sequelize.transaction();
@@ -114,5 +153,6 @@ module.exports = {
   addExpense,
   getExpenses,
   deleteExpense,
-  leardboardData
+  leardboardData,
+  updateExpense
 };

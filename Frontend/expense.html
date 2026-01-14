@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-3">
           <label for="expense-description" class="form-label">Description</label>
-          <input type="text" class="form-control" id="expense-description" placeholder="Enter description">
+          <textarea class="form-control" id="expense-description" placeholder="Enter description"></textarea>
         </div>
         <div class="col-md-3">
           <label for="expense-category" class="form-label">Category</label>
@@ -36,10 +36,18 @@
         <div class="col-md-3">
           <button class="btn btn-primary w-100" type="button" onclick="Timetracker()">Add Expense</button>
         </div>
-        <div><p>You are the premium user</p>
-          <button class="show-button" type="submit" onClick="LeaderBoard()">Show Leaderboard</button>
-           <button class="Download-Expenses" id="downloadBtn" disabled>Download Expenses</button>
-        </div>
+       <div> <p id="premiumText">You are a normal user</p>
+        <button class="btn btn-success mb-2" id="premiumBtn">Upgrade to Premium</button>
+
+  <button class="show-button" type="button" onClick="LeaderBoard()">
+    Show Leaderboard
+  </button>
+
+  <button class="Download-Expenses" id="downloadBtn" disabled>
+    Download Expenses
+  </button>
+</div>
+
       </div>
     </div>
      <div class="mb-2">

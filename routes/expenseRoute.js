@@ -8,6 +8,6 @@ route.post("/addExpense", authenticateToken, expenseController.addExpense);
 route.get("/expenses", authenticateToken, expenseController.getExpenses);
 route.delete("/expense/:id", authenticateToken, expenseController.deleteExpense);
 route.get('/leaderboard',authenticateToken,expenseController.leardboardData)
-// route.post("/addingValues", authenticateToken, expenseController.addingValuestoUserandExpense);
+route.put("/addingValues/:id", authenticateToken, expenseController.updateExpense);
 
 module.exports = route;

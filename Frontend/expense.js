@@ -420,6 +420,7 @@
 let allExpenses = [];
 let currentPage = 1;
 const limit = 10;
+let editingExpenseId = null;
 
 // -------------------- ADD EXPENSE ------------------------
 function Timetracker() {
@@ -451,7 +452,6 @@ function Timetracker() {
 
       allExpenses.push(expense);
 
-      // ✅ go to last page automatically
       currentPage = Math.ceil(allExpenses.length / limit);
       renderPage(currentPage);
 
@@ -488,7 +488,6 @@ function addExpenseToUI(expense) {
       .then(() => {
         allExpenses = allExpenses.filter((e) => e.id !== expense.id);
 
-        // ✅ fix empty page after delete
         const totalPages = Math.ceil(allExpenses.length / limit);
         if (currentPage > totalPages) {
           currentPage = totalPages || 1;
@@ -507,7 +506,6 @@ function addExpenseToUI(expense) {
     document.getElementById("expense-description").value = expense.description;
     document.getElementById("expense-category").value = expense.category;
 
-    // ✅ remove from array + re-render
     allExpenses = allExpenses.filter((e) => e.id !== expense.id);
     renderPage(currentPage);
   };
@@ -593,8 +591,43 @@ function lastPage() {
   renderPage(totalPages);
 }
 
+/* =========================================================
+   ✅ ADDED CODE STARTS HERE (NOT MODIFYING ANYTHING ABOVE)
+   ========================================================= */
+
+// ✅ DOWNLOAD EXPENSES FUNCTIONALITY (ADDED)
+document.getElementById("downloadBtn")?.addEventListener("click", () => {
+  const isPremiumUser = localStorage.getItem("isPremiumUser") === "true";
+  if (!isPremiumUser) {
+    alert("Upgrade to premium to download expenses");
+    return;
+  }
+
+  if (allExpenses.length === 0) {
+    alert("No expenses to download");
+    return;
+  }
+
+  let csv = "Amount,Description,Category,Created At\n";
+  allExpenses.forEach((exp) => {
+    csv += `${exp.amount},${exp.description},${exp.category},${exp.createdAt}\n`;
+  });
+
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "expenses.csv";
+  a.click();
+
+  URL.revokeObjectURL(url);
+});
+
 // ------------------- ON PAGE LOAD -------------------------
 window.addEventListener("DOMContentLoaded", async () => {
+    localStorage.setItem("isPremiumUser", "true");
+
   const isPremiumUser = localStorage.getItem("isPremiumUser") === "true";
   const downloadBtn = document.getElementById("downloadBtn");
 
